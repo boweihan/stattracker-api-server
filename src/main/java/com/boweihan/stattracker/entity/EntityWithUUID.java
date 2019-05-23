@@ -1,4 +1,4 @@
-package com.boweihan.stattracker.entities;
+package com.boweihan.stattracker.entity;
 
 import org.hibernate.annotations.Type;
 

@@ -1,4 +1,4 @@
-package com.boweihan.stattracker.entities;
+package com.boweihan.stattracker.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Match extends EntityWithUUID {
+    private String name;
+
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_match_season"))
     private Season season;

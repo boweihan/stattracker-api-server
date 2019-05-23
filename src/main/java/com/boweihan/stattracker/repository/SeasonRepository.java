@@ -1,6 +1,6 @@
-package com.boweihan.stattracker.repositories;
+package com.boweihan.stattracker.repository;
 
-import com.boweihan.stattracker.entities.Season;
+import com.boweihan.stattracker.entity.Season;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;
