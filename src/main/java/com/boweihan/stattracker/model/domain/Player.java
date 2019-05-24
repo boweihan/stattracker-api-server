@@ -1,4 +1,5 @@
-package com.boweihan.stattracker.entity;
+package com.boweihan.stattracker.model.domain;
+import com.boweihan.stattracker.model.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Player extends EntityWithUUID {
+public class Player extends BaseModel {
     private String name;
     private String email;
 

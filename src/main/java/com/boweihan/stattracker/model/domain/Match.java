@@ -1,6 +1,7 @@
-package com.boweihan.stattracker.entity;
+package com.boweihan.stattracker.model.domain;
 
 
+import com.boweihan.stattracker.model.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Match extends EntityWithUUID {
+public class Match extends BaseModel {
     private Timestamp timestamp;
 
     @ManyToOne

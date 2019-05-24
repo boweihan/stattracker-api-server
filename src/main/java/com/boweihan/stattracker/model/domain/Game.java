@@ -1,19 +1,18 @@
-package com.boweihan.stattracker.entity;
+package com.boweihan.stattracker.model.domain;
 
 
+import com.boweihan.stattracker.model.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Game extends EntityWithUUID {
+public class Game extends BaseModel {
     private int winningScore;
     private int losingScore;
 
