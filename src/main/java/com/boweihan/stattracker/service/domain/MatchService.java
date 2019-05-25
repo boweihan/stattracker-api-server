@@ -4,12 +4,15 @@ import com.boweihan.stattracker.model.domain.Match;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+import java.util.UUID;
+
 public interface MatchService {
     Match createMatch(Match match);
 
-    Page<Match> getMatchs(Pageable pageable);
+    Iterable<Match> getMatchs();
 
-    Match getMatch(Long matchId);
+    Optional<Match> getMatch(UUID matchId);
 
     Match saveMatch(Match match);
 

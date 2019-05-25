@@ -4,12 +4,15 @@ import com.boweihan.stattracker.model.domain.Player;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+import java.util.UUID;
+
 public interface PlayerService {
     Player createPlayer(Player player);
 
-    Page<Player> getPlayers(Pageable pageable);
+    Iterable<Player> getPlayers();
 
-    Player getPlayer(Long playerId);
+    Optional<Player> getPlayer(UUID playerId);
 
     Player savePlayer(Player player);
 

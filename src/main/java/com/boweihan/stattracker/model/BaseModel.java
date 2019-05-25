@@ -1,5 +1,6 @@
 package com.boweihan.stattracker.model;
 
+import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.lang.Nullable;
 
@@ -11,6 +12,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @MappedSuperclass
+@Data
 public class BaseModel {
     private Instant timeCreated;
 

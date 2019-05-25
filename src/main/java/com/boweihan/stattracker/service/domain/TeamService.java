@@ -4,12 +4,15 @@ import com.boweihan.stattracker.model.domain.Team;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+import java.util.UUID;
+
 public interface TeamService {
     Team createTeam(Team team);
 
-    Page<Team> getTeams(Pageable pageable);
+    Iterable<Team> getTeams();
 
-    Team getTeam(Long teamId);
+    Optional<Team> getTeam(UUID teamId);
 
     Team saveTeam(Team team);
 
