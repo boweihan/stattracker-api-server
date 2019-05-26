@@ -3,9 +3,13 @@ package com.boweihan.stattracker.service.domain;
 import com.boweihan.stattracker.model.domain.Player;
 import com.boweihan.stattracker.repository.domain.PlayerRepository;
 import com.boweihan.stattracker.service.exception.domain.PlayerConflictException;
+import com.boweihan.stattracker.service.exception.domain.PlayerNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
@@ -24,13 +28,21 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Iterable<Player> getPlayers() {
-        return playerRepository.findAll();
+    public List<Player> getPlayers() {
+        return StreamSupport.stream(
+                playerRepository
+                        .findAll()
+                        .spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Player> getPlayer(UUID playerId) {
-        return playerRepository.findById(playerId);
+    public Player getPlayer(UUID playerId) {
+        Optional<Player> player = playerRepository.findById(playerId);
+        if (!player.isPresent()) {
+            throw new PlayerNotFoundException();
+        }
+        return player.get();
     }
 
     @Override
@@ -39,7 +51,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public void deletePlayer(Player player) {
-        playerRepository.delete(player);
+    public void deletePlayer(UUID playerId) {
+        playerRepository.deleteById(playerId);
     }
 }

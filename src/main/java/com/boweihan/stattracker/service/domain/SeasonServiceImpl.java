@@ -3,9 +3,13 @@ package com.boweihan.stattracker.service.domain;
 import com.boweihan.stattracker.model.domain.Season;
 import com.boweihan.stattracker.repository.domain.SeasonRepository;
 import com.boweihan.stattracker.service.exception.domain.SeasonConflictException;
+import com.boweihan.stattracker.service.exception.domain.SeasonNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class SeasonServiceImpl implements SeasonService {
     private final SeasonRepository seasonRepository;
@@ -24,13 +28,21 @@ public class SeasonServiceImpl implements SeasonService {
     }
 
     @Override
-    public Iterable<Season> getSeasons() {
-        return seasonRepository.findAll();
+    public List<Season> getSeasons() {
+        return StreamSupport.stream(
+                seasonRepository
+                        .findAll()
+                        .spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Season> getSeason(UUID seasonId) {
-        return seasonRepository.findById(seasonId);
+    public Season getSeason(UUID seasonId) {
+        Optional<Season> season = seasonRepository.findById(seasonId);
+        if (!season.isPresent()) {
+            throw new SeasonNotFoundException();
+        }
+        return season.get();
     }
 
     @Override
@@ -39,7 +51,7 @@ public class SeasonServiceImpl implements SeasonService {
     }
 
     @Override
-    public void deleteSeason(Season season) {
-        seasonRepository.delete(season);
+    public void deleteSeason(UUID seasonId) {
+        seasonRepository.deleteById(seasonId);
     }
 }
